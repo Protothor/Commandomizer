@@ -38,3 +38,39 @@ export const processArgs = () => {
     rebuild
   }
 }
+
+export const remove = (array, rm) => {
+  rm.forEach(e => {
+    array.splice(array.indexOf(e), 1)
+  });
+  return array
+}
+
+export const addMana = (pips, manaPips) => {
+  const pipsTotal = Object.values(pips).reduce((acc, val) => acc + val, 0)
+  const pipsPercent = {}
+  for (const key in pips) {
+    pipsPercent[key] = pips[key] / pipsTotal
+  }
+
+  const manaTotal = Object.values(manaPips).reduce((acc, val) => acc + val, 0) + 1
+  const difference = {}
+  for (const key in manaPips) {
+    const localManaPips = {...manaPips}
+    localManaPips[key] += 1
+    const localManaPercent = {}
+    for (const localKey in localManaPips) {
+      localManaPercent[localKey] = (localManaPips[localKey] / manaTotal)
+    }
+    difference[key] = Object.keys(manaPips).reduce((acc, localKey) => acc + Math.abs(pipsPercent[localKey] - localManaPercent[localKey]), 0)
+  }
+  let propertyToAdd
+  let smallest = Infinity
+  for(const key in difference) {
+    if (difference[key] < smallest) {
+      smallest = difference[key]
+      propertyToAdd = key
+    }
+  }
+  return propertyToAdd
+}
