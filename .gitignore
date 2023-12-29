@@ -1,3 +1,7 @@
 *.txt
 **.txt
-src/jsons/**.json
+src/jsons/AllPrintings.json
+src/jsons/commanders.json
+src/jsons/db.json
+src/jsons/filtered.json
+src/jsons/lands.json
