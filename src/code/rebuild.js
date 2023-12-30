@@ -1,3 +1,5 @@
+import fs from "fs"
+
 export const rebuildData = async (fetchData) => {
   // ------------------------------------------ FETCH ------------------------------------------
   const cards = fetchData ? await (fetch("https://mtgjson.com/api/v5/AllPrintings.json").then(v => v.text()).then((data) => {
